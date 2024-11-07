@@ -14,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
 
     private float x;
     private float y;
+    private float posInicialX;
+    private float posInicialY;
 
 
     @Override
@@ -27,6 +29,52 @@ public class MainActivity extends AppCompatActivity {
 
 
         objeto1.setOnTouchListener(new View.OnTouchListener() {
+
+
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+
+
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+
+                        //guardar la posición al inicar (una vez)
+                        posInicialX = view.getX();
+                        posInicialY = view.getY();
+
+                        // Guardar la posición de pulsar
+                        x = event.getRawX() - posInicialX;
+                        y = event.getRawY() - posInicialY;
+
+                        break;
+
+                    case MotionEvent.ACTION_MOVE:
+                        // Cambiar la posición segun el movimiento
+                        float newX = event.getRawX() - x;
+                        float newY = event.getRawY() - y;
+
+                        // Mover la vista a la nueva posición
+                        view.animate()
+                                .x(newX)
+                                .y(newY)
+                                .setDuration(0) // Para que no haya demora en el movimiento
+                                .start();
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+
+                        //view.setX(posInicialX);
+                        //view.setY(posInicialY);
+                        break;
+
+                    default:
+                        return false;
+                }
+                return true;
+            }
+        });
+
+        objeto2.setOnTouchListener(new View.OnTouchListener() {
 
 
             @Override
