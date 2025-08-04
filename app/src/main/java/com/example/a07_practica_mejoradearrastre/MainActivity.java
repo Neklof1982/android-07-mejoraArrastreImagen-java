@@ -94,16 +94,16 @@ public class MainActivity extends AppCompatActivity {
                         float newX = event.getRawX() - x;
                         float newY = event.getRawY() - y;
 
-                        // Animate the view to new position smoothly
+                        // Nueva Posición
                         view.animate()
                                 .x(newX)
                                 .y(newY)
-                                .setDuration(0) // Set duration for no animation delay (instant move)
+                                .setDuration(0) // Movimiento instantaneo
                                 .start();
                         break;
 
                     case MotionEvent.ACTION_UP:
-                        // Optionally handle touch release (e.g., for snapping or actions)
+                        // Liberar
                         break;
 
                     default:
